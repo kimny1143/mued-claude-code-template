@@ -1,5 +1,7 @@
 # Claude Code Template
 
+> **1人で作る。10のAIと。**
+
 Claude Code のベストプラクティスを構造化したテンプレート。
 個人開発者・小規模チームが Claude Code を実務で運用するための
 commands / skills / agents / hooks を体系的にまとめたもの。
