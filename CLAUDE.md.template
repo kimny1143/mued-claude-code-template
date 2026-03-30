@@ -1,0 +1,122 @@
+# CLAUDE.md
+
+Claude Code がこのリポジトリで作業する際のガイドライン。
+
+---
+
+## クイックスタート
+
+```bash
+# 環境構築
+npm install
+cp .env.example .env.local  # 環境変数設定
+
+# 開発
+npm run dev                  # 開発サーバー
+
+# テスト・品質
+npm run test                 # テスト
+npm run lint                 # Lint
+npm run build                # ビルド
+```
+
+---
+
+## プロジェクト概要
+
+**[プロジェクト名]** - [一言説明]
+
+### 技術スタック
+
+| カテゴリ | 技術 |
+|---------|------|
+| **Frontend** | [例: Next.js, React, TypeScript] |
+| **Backend** | [例: Node.js, Express] |
+| **Database** | [例: PostgreSQL, Prisma] |
+| **Testing** | [例: Vitest, Playwright] |
+
+### アーキテクチャ
+
+- [主要なアーキテクチャパターンを記載]
+- [例: Repository パターン、Service 層など]
+
+---
+
+## ディレクトリ構造
+
+```
+project/
+├── src/               # ソースコード
+│   ├── components/    # UIコンポーネント
+│   ├── lib/           # ユーティリティ
+│   └── ...
+├── tests/             # テスト
+└── docs/              # ドキュメント
+```
+
+---
+
+## 重要な注意事項
+
+### セキュリティ
+
+- 環境変数は `.env.local` で管理（Git にコミットしない）
+- API キーをコードに直接書かない
+
+### コーディング規約
+
+- [プロジェクト固有のルールを記載]
+
+---
+
+## Commands（スラッシュコマンド）
+
+| コマンド | 用途 |
+|---------|------|
+| `/commit` | Git コミットワークフロー |
+| `/pr` | Pull Request 作成 |
+| `/build-fix` | ビルドエラー自動修正 |
+| `/security` | セキュリティ監査 |
+
+---
+
+## Skills（詳細ガイド）
+
+特定の作業時は `.claude/skills/` の該当スキルを参照：
+
+| スキル | 用途 |
+|-------|------|
+| `ui-ux-pro-max` | UI/UX設計、glassmorphism、アクセシビリティ |
+| `web-performance` | Core Web Vitals、Lighthouse最適化 |
+| `tdd` | テスト駆動開発 |
+| `backend-patterns` | API/Repository パターン |
+| `coding-rules` | コーディング規約 |
+| `git-worktree` | Git worktree 操作 |
+
+---
+
+## 関連ドキュメント
+
+| ドキュメント | 内容 |
+|-------------|------|
+| [docs/xxx.md](docs/xxx.md) | [説明] |
+
+---
+
+## 学習メモ
+
+### Patterns（推奨パターン）
+
+<!-- プロジェクト固有の学びを記録 -->
+- [例] **gitignoreの効率的な書き方**: 個別ファイル列挙より `*` で全て無視して `!` でホワイトリスト指定する方が管理しやすい
+
+### Gotchas（落とし穴）
+
+<!-- 再発防止のための注意点を記録 -->
+- [例] **半透明背景とコントラスト**: glassmorphism (bg-white/5, bg-black/45等) では実効背景色が変わるため、`text-slate-*` は使わず `text-white` または `text-white/80` 以上を使用する
+
+- [例] **CLAUDE.mdの情報を鵜呑みにしない**: ディレクトリ構造等の情報は古くなっている可能性あり。実際のファイルシステムを確認してから言及すること
+
+---
+
+*最終更新: [日付]*

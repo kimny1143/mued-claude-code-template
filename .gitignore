@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+
+# Claude Code local config
+.claude/settings.local.json
+skills-lock.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# AI editor configs
+.adal/
+.augment/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
