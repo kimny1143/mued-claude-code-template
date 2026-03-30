@@ -126,6 +126,22 @@ Affaan Mustafa の「[Everything Claude Code](https://github.com/affaan-m/everyt
 | `claude-peers` | 複数 Claude Code インスタンス間のリアルタイム連携 |
 | `fal-video` | fal.ai 動画生成 |
 
+## Pro Version
+
+The complete operations manual for running a multi-agent Claude Code organization.
+
+**Includes:**
+- Tier System Operations Manual (T1 self-review / T2 peer-review / T3 conductor-review)
+- Daily Report Templates + 3 real-world samples
+- 10-Department Organization Chart Template + Design Decision Notes
+- Cost Management Templates + freee Integration Flow
+
+All documents available in English and Japanese.
+
+**[$29 on Gumroad](https://glasswerks.gumroad.com/l/claude-code-template-pro)**
+
+---
+
 ## Quick Start
 
 ### 方法 A: fork して使う（推奨）
