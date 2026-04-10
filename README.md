@@ -1,110 +1,150 @@
 # Claude Code Template
 
-> **1人で作る。10のAIと。**
+**37 skills. 8 commands. 6 agents. 3 MCPs. One setup script.**
 
-Claude Code のベストプラクティスを構造化したテンプレート。
-個人開発者・小規模チームが Claude Code を実務で運用するための
-commands / skills / agents / hooks を体系的にまとめたもの。
+Claude Code のベストプラクティスを凝縮したテンプレート。`setup.sh` を実行するだけで、テスト駆動開発からマーケティング監査まで、37 のスキルがプロジェクトに即座に適用される。
 
-Affaan Mustafa の「[Everything Claude Code](https://github.com/affaan-m/everything-claude-code)」ガイドと [Anthropic 公式ベストプラクティス](https://www.anthropic.com/engineering/claude-code-best-practices)を基に、実運用で磨いた構成です。
+> **[Pro版 ($29)](https://glasswerks.gumroad.com/l/claude-code-template-pro)** — AIマルチエージェントチーム運用テンプレート。Conductor設定・Tier制PRレビュー・巡回レポート・コスト管理の実運用ノウハウを収録。[Free vs Pro 比較 →](#free-vs-pro)
 
-## What's Inside
+---
 
-### Commands（スラッシュコマンド）
+## Before / After
 
-| コマンド | 用途 |
-|---------|------|
-| `/commit` | Git コミットワークフロー |
-| `/pr` | Pull Request 作成 |
-| `/ship` | Commit → Push → PR 一括実行 |
-| `/build-fix` | ビルドエラー自動修正 |
-| `/security` | セキュリティ監査 |
-| `/learn` | CLAUDE.md 育成 |
+### Before: テンプレートなし
 
-### Skills（詳細ガイド）
+```
+You: "Write tests first, then implement"
+Claude: *writes tests with random patterns, inconsistent structure*
 
-**開発**
+You: "Review this PR for security issues"
+Claude: *generic checklist, misses project-specific risks*
+
+You: "Set up analytics tracking"
+Claude: *starts from scratch every time*
+```
+
+毎回ゼロから指示。プロジェクトが変わるたびに同じ説明を繰り返す。
+
+### After: テンプレート適用後
+
+```
+You: /tdd
+Claude: *RED-GREEN-REFACTOR cycle with your project's test framework*
+
+You: /security
+Claude: *OWASP Top 10 + dependency audit + your CI pipeline integration*
+
+You: "Set up analytics"
+Claude: → analytics-tracking skill auto-loaded
+       *GA4 setup, event taxonomy, UTM strategy, tag manager config*
+```
+
+スキルが自動ロードされ、ベストプラクティスに沿った出力が即座に得られる。
+
+---
+
+## Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/kimny1143/claude-code-template.git ~/claude-code-template
+
+# 2. Setup (any project)
+cd /path/to/your/project
+curl -o setup-claude.sh https://raw.githubusercontent.com/kimny1143/claude-code-template/main/setup.sh
+chmod +x setup-claude.sh && ./setup-claude.sh
+
+# Done. All skills, commands, agents, hooks are symlinked.
+```
+
+テンプレートを更新すれば全プロジェクトに即反映（シンボリックリンク方式）。
+
+---
+
+## What's Included
+
+### Commands（8 スラッシュコマンド）
+
+| コマンド | 用途 | 使いどころ |
+|---------|------|-----------|
+| `/commit` | Git コミットワークフロー | 変更をコミットする時 |
+| `/pr` | Pull Request 作成 | PRを作成する時 |
+| `/ship` | Commit → Push → PR 一括 | 実装完了後の一括処理 |
+| `/build-fix` | ビルドエラー自動修正 | CI/ビルドが壊れた時 |
+| `/security` | セキュリティ監査 | リリース前チェック |
+| `/learn` | CLAUDE.md 育成 | プロジェクト設定の学習・更新 |
+| `/codex` | OpenAI Codex CLI 委譲 | Codex CLIにタスクを渡す時 |
+| `/ios` | iOS ビルド & 提出 | App Store提出ワークフロー |
+
+### Skills（37 スキル）
+
+#### Development（11）
 
 | スキル | 用途 |
 |-------|------|
-| `tdd` | テスト駆動開発 |
-| `backend-patterns` | API/Repository パターン |
-| `coding-rules` | コーディング規約 |
-| `git-worktree` | Git worktree 操作 |
-| `hooks` | Claude Code Hook 作成 |
-| `mcp` | MCP サーバー作成 |
+| `tdd` | テスト駆動開発（RED-GREEN-REFACTOR） |
+| `backend-patterns` | API / Repository / バリデーションパターン |
+| `coding-rules` | TypeScript / 命名規則 / 関数設計 |
+| `git-worktree` | Git worktree 並行開発 |
+| `hooks` | Claude Code Hook 作成・管理 |
+| `mcp` | MCP サーバー作成・設定 |
 | `remotion` | Remotion 動画制作 |
-| `core-web-vitals` | Core Web Vitals 計測・診断 |
+| `ios-app-store-submission` | iOS App Store 提出ワークフロー |
+| `vercel-react-best-practices` | React / Next.js パフォーマンス最適化 |
+| `vercel-react-native-skills` | React Native / Expo ベストプラクティス |
+| `vercel-composition-patterns` | React コンポジションパターン |
 
-**UI/UX・デザイン**
-
-| スキル | 用途 |
-|-------|------|
-| `ui-ux-pro-max` | UI/UX デザイン全般 |
-| `ux-psychology` | UX 心理学効果の適用 |
-| `web-design-guidelines` | Web Interface Guidelines 準拠チェック |
-| `app-onboarding` | アプリオンボーディング設計・改善 |
-
-**コンテンツ制作**
+#### Marketing & CRO（15）
 
 | スキル | 用途 |
 |-------|------|
-| `ai-interview-article` | インタビュー形式 note 記事作成 |
-| `note-serial-monetization` | note 連載の有料/無料設計 |
-
-**マーケティング・CRO**
-
-| スキル | 用途 |
-|-------|------|
-| `lp-optimizer` | LP/ページ分析・改善 |
+| `lp-optimizer` | LP / ページ分析・改善 |
 | `copywriting` | マーケティングコピー作成 |
 | `seo-audit` | SEO 監査・診断 |
 | `marketing-audit` | マーケティング総合監査 |
 | `marketing-psychology` | 心理学ベースのマーケティング |
-| `launch-strategy` | ローンチ・GTM 戦略 |
+| `launch-strategy` | ローンチ / GTM 戦略 |
 | `pricing-strategy` | 価格設定・パッケージング |
 | `ab-test-setup` | A/B テスト設計・実装 |
-| `analytics-tracking` | アナリティクス実装 |
+| `analytics-tracking` | アナリティクス計測・実装 |
+| `core-web-vitals` | Core Web Vitals 計測・改善 |
 | `email-sequence` | メールシーケンス作成 |
 | `referral-program` | リファラルプログラム設計 |
 | `signup-flow-cro` | サインアップフロー最適化 |
 | `onboarding-cro` | オンボーディング最適化 |
 | `form-cro` | フォーム最適化 |
+
+#### UX & Product（5）
+
+| スキル | 用途 |
+|-------|------|
+| `ui-ux-pro-max` | UI/UX 設計・実装・レビュー |
+| `ux-psychology` | UX 心理学効果の適用 |
+| `web-design-guidelines` | Web Interface Guidelines 準拠レビュー |
+| `app-onboarding` | アプリオンボーディング設計・改善 |
 | `paywall-upgrade-cro` | ペイウォール・アップグレード最適化 |
 
-**React / Next.js**
+#### Payments & Billing（3）
 
 | スキル | 用途 |
 |-------|------|
-| `vercel-react-best-practices` | React/Next.js パフォーマンス最適化 |
-| `vercel-composition-patterns` | React コンポジションパターン |
-| `vercel-react-native-skills` | React Native / Expo ベストプラクティス |
+| `stripe-best-practices` | Stripe 統合ガイド（API選択・Connect・課金・Treasury） |
+| `stripe-projects` | Stripe Projects CLI でのスタック構築 |
+| `upgrade-stripe` | Stripe API バージョン・SDK アップグレード |
 
-**Stripe**
-
-| スキル | 用途 |
-|-------|------|
-| `stripe-best-practices` | Stripe インテグレーション設計 |
-| `stripe-projects` | Stripe Projects セットアップ |
-| `upgrade-stripe` | Stripe API バージョンアップグレード |
-
-**iOS**
+#### Content & Monetization（3）
 
 | スキル | 用途 |
 |-------|------|
-| `ios-app-store-submission` | App Store 提出ワークフロー |
-
-**freee**
-
-| スキル | 用途 |
-|-------|------|
+| `ai-interview-article` | インタビュー形式 note 記事作成 |
+| `note-serial-monetization` | note 連載の有料/無料設計 |
 | `freee-api-skill` | freee API 操作ガイド |
 
-### Agents（サブエージェント）
+### Agents（6 サブエージェント）
 
 | エージェント | 用途 |
 |-------------|------|
-| `code-reviewer` | PR/コードレビュー |
+| `code-reviewer` | PR / コードレビュー |
 | `security-reviewer` | セキュリティ監査 |
 | `codebase-optimizer` | コード最適化・重複検出 |
 | `docs-curator` | ドキュメント整理 |
@@ -115,234 +155,146 @@ Affaan Mustafa の「[Everything Claude Code](https://github.com/affaan-m/everyt
 
 | フック | タイミング | 用途 |
 |--------|-----------|------|
-| `block-main-push.sh` | PreToolUse | main への直接 push をブロック |
-| `validate-dangerous-ops.sh` | PreToolUse | 危険操作ブロック |
-| `suggest-git-cleanup.sh` | Stop | Git 整理提案 |
-| `check-remotion-quality.sh` | PostToolUse | Remotion 品質チェック |
+| `validate-dangerous-ops.sh` | PreToolUse | 危険操作（rm -rf, DROP TABLE 等）ブロック |
+| `block-main-push.sh` | PreToolUse | main ブランチへの直接 push 防止 |
+| `suggest-git-cleanup.sh` | Stop | セッション終了時の Git 整理提案 |
 
-### MCP Servers
+### MCPs（MCP サーバー）
 
 | MCP | 用途 |
 |-----|------|
-| `nano-banana-pro` | Gemini 画像生成・編集 |
+| `claude-history` | claude.ai 会話履歴の検索（Python） |
+| `nano-banana-pro` | Gemini 画像生成・編集（npx） |
 | `claude-peers` | 複数 Claude Code インスタンス間のリアルタイム連携 |
-| `fal-video` | fal.ai 動画生成 |
-
-## Pro Version
-
-The complete operations manual for running a multi-agent Claude Code organization.
-
-**Includes:**
-- Tier System Operations Manual (T1 self-review / T2 peer-review / T3 conductor-review)
-- Daily Report Templates + 3 real-world samples
-- 10-Department Organization Chart Template + Design Decision Notes
-- Cost Management Templates + freee Integration Flow
-
-All documents available in English and Japanese.
-
-**[$29 on Gumroad](https://glasswerks.gumroad.com/l/claude-code-template-pro)**
 
 ---
 
-## Quick Start
+## Setup Details
 
-### 方法 A: fork して使う（推奨）
+### 方法 A: シンボリックリンクで共有（推奨）
 
-1. このリポジトリを fork
-2. `CLAUDE.md.template` → `CLAUDE.md` にリネーム
-3. プロジェクト情報を記入
-4. `settings.local.json.example` → `settings.local.json` にコピーしパス修正
+複数プロジェクトで設定を共有し、テンプレート更新が全プロジェクトに即反映。
 
 ```bash
-# fork後
-git clone https://github.com/YOUR_USERNAME/mued-claude-code-template.git
-cd mued-claude-code-template
-cp CLAUDE.md.template CLAUDE.md
-cp .claude/settings.local.json.example .claude/settings.local.json
-# CLAUDE.md と settings.local.json を自分のプロジェクトに合わせて編集
-```
+# テンプレートを配置
+git clone https://github.com/kimny1143/claude-code-template.git ~/claude-code-template
 
-### 方法 B: シンボリックリンクで共有
-
-複数プロジェクトで設定を共有し、一括更新できる方法。
-
-```bash
-# 1. テンプレートを配置
-git clone https://github.com/kimny1143/mued-claude-code-template.git ~/claude-code-template
-
-# 2. セットアップスクリプトを実行
+# 任意のプロジェクトにセットアップ
 cd /path/to/your/project
-bash ~/claude-code-template/setup.sh
+curl -o setup-claude.sh https://raw.githubusercontent.com/kimny1143/claude-code-template/main/setup.sh
+chmod +x setup-claude.sh && ./setup-claude.sh
 ```
 
-テンプレートを更新すると、全プロジェクトに自動反映（シンボリックリンクのため）。
+手動で個別にリンクする場合:
+```bash
+TEMPLATE=~/claude-code-template/.claude
+mkdir -p .claude/{commands,skills,agents,hooks}
 
-#### シンボリックリンク構成のイメージ
+# コマンドをリンク
+ln -s $TEMPLATE/commands/commit.md .claude/commands/
+ln -s $TEMPLATE/commands/pr.md .claude/commands/
+
+# スキルをリンク
+ln -s $TEMPLATE/skills/tdd .claude/skills/
+ln -s $TEMPLATE/skills/coding-rules .claude/skills/
+# ... 必要なスキルを選択
+```
+
+#### 構成イメージ
 
 ```
-mued-claude-code-template/     <- 共有設定の原本
+claude-code-template/              ← 共有設定の原本
 ├── .claude/
-│   ├── commands/
-│   │   ├── commit.md          <- 全プロジェクト共通
-│   │   └── pr.md
-│   └── skills/
-│       ├── tdd/               <- 全プロジェクト共通
-│       └── coding-rules/
+│   ├── commands/commit.md         ← 全プロジェクト共通
+│   ├── skills/tdd/                ← 全プロジェクト共通
+│   └── agents/code-reviewer.md
 
 your-project/.claude/
 ├── commands/
-│   ├── commit.md -> ~/claude-code-template/.claude/commands/commit.md  (symlink)
-│   └── my-workflow.md         <- プロジェクト固有
+│   ├── commit.md → symlink        ← テンプレートから
+│   └── deploy.md                  ← プロジェクト固有
 └── skills/
-    ├── tdd -> ~/claude-code-template/.claude/skills/tdd  (symlink)
-    └── database/              <- プロジェクト固有
+    ├── tdd → symlink              ← テンプレートから
+    └── my-database/               ← プロジェクト固有
 ```
 
-### 方法 C: 必要なものだけコピー
+### 方法 B: コピーで使用
+
+独立した設定が必要な場合。
 
 ```bash
-git clone https://github.com/kimny1143/mued-claude-code-template.git
-cd mued-claude-code-template
-
-# 必要なものだけコピー
-cp -r .claude/commands/ /path/to/your/project/.claude/commands/
-cp -r .claude/skills/tdd /path/to/your/project/.claude/skills/
-cp CLAUDE.md.template /path/to/your/project/CLAUDE.md
+git clone https://github.com/kimny1143/claude-code-template.git
+cp -r claude-code-template/.claude/ /path/to/your/project/
+cp claude-code-template/CLAUDE.md.template /path/to/your/project/CLAUDE.md
 ```
 
-## 運用例: マルチエージェント体制
+---
 
-> この運用例は [glasswerks inc.](https://glasswerks.co.jp) での実績に基づいています。
-
-### 課（部署）構成の設計
-
-1エージェント = 1課（1つのワークスペース）で、リポジトリ境界ごとに分割:
-
-```
-経営部: conductor課（全体統括・進捗管理）
-プロダクト部: mued課, native課
-マーケティング部: SNS課, write課, video課
-コーポレート部: LP課, freee課
-データ部: data課
-総務部: template課（このテンプレートの管理）
-```
-
-### Tier 制度（PR レビュー権限の段階的委譲）
-
-AI エージェントに段階的に権限を委譲するための仕組み:
-
-| Tier | 対象 | フロー |
-|------|------|--------|
-| T1 | docs・データのみ | セルフマージ（CI 通過必須） |
-| T2 | コード変更 | ピアレビュー（同部署の別エージェント） |
-| T3 | セキュリティ・DB・外部サービス | 人間レビュー |
-
-### ブランチ保護
-
-- `block-main-push.sh`: main への直接 push を自動ブロック
-- `settings.local.json`: 権限の allow/deny を細かく制御
-- 全変更は feature ブランチ → PR → マージの流れ
-
-## 構造
-
-```
-.claude/
-├── commands/           # スラッシュコマンド
-│   ├── commit.md
-│   ├── pr.md
-│   ├── ship.md
-│   ├── build-fix.md
-│   ├── security.md
-│   └── learn.md
-├── skills/             # 詳細ガイド（37スキル）
-│   ├── tdd/
-│   ├── backend-patterns/
-│   ├── coding-rules/
-│   └── ...
-├── agents/             # サブエージェント定義
-│   ├── code-reviewer.md
-│   ├── security-reviewer.md
-│   ├── codebase-optimizer.md
-│   ├── docs-curator.md
-│   ├── code-simplifier.md
-│   └── verify-app.md
-├── hooks/              # 自動実行スクリプト
-│   ├── block-main-push.sh
-│   ├── validate-dangerous-ops.sh
-│   ├── suggest-git-cleanup.sh
-│   └── check-remotion-quality.sh
-└── settings.local.json.example
-
-mcps/                   # MCP サーバー
-├── nano-banana-pro/
-│   ├── launch.sh
-│   └── README.md
-├── fal-video/
-│   └── launch.sh
-└── claude-peers/
-    └── README.md
-
-project-configs/        # プロジェクト別設定例
-docs/templates/         # ドキュメントテンプレート
-CLAUDE.md.template      # プロジェクト説明テンプレート
-setup.sh                # セットアップスクリプト
-```
-
-## カスタマイズ
+## Customization
 
 ### プロジェクト固有のスキル追加
 
 ```bash
 mkdir -p .claude/skills/your-skill
 cat > .claude/skills/your-skill/SKILL.md << 'EOF'
----
-description: "Your skill description. Trigger: keyword1, keyword2"
----
-
-# Your Skill
-
-（スキルの内容）
-EOF
-```
-
-### プロジェクト固有のコマンド追加
-
-```bash
-cat > .claude/commands/your-command.md << 'EOF'
-Your command instructions here.
+Your skill instructions here.
+Trigger: "your keyword"
 EOF
 ```
 
 ### Hooks のカスタマイズ
 
-`validate-dangerous-ops.sh` に独自の検証ルールを追加するか、新しい hook スクリプトを作成して `settings.local.json` に登録。
+`.claude/settings.local.json` でフックのパスとマッチャーを設定:
 
-## FAQ
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/validate-dangerous-ops.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
-**Q: ライセンスは？**
-A: MIT License。商用利用・改変・再配布すべて自由。
+---
 
-**Q: 社内テンプレートとして使ってよいか？**
-A: はい。fork して自社向けにカスタマイズしてください。
+## Free vs Pro
 
-**Q: Claude Code 以外の AI コーディングツールでも使える？**
-A: スキルの内容（SKILL.md）は汎用的な知識ですが、commands / hooks / settings.json は Claude Code 固有の仕組みです。
+| | Free（このリポジトリ） | [Pro ($29)](https://glasswerks.gumroad.com/l/claude-code-template-pro) |
+|---|---|---|
+| **Skills** | 37 スキル | 37 スキル |
+| **Commands** | 8 コマンド | 8 コマンド |
+| **Agents** | 6 エージェント | 6 エージェント |
+| **Hooks** | 6 フック | 6 フック |
+| **MCPs** | 3 MCP設定 | 3 MCP設定 |
+| **Conductor テンプレート** | - | 指揮エージェントの完全版 CLAUDE.md（巡回スケジュール・権限モデル） |
+| **Tier制 PRレビュー** | - | 3段階レビューシステム運用マニュアル（Tier 1: セルフマージ / Tier 2: ピアレビュー / Tier 3: 承認制） |
+| **巡回レポート** | - | テンプレート + 通常日・インシデント日の実サンプル 2 種 |
+| **日報テンプレート** | - | フォーマット + 3 日分のリアルなサンプル |
+| **組織図テンプレート** | - | 記入式 + 10 課体制の記入済みサンプル + 設計判断メモ |
+| **コスト管理** | - | 月次追跡 + 損益分岐点計算 + 四半期監査レポート + 記入済みサンプル |
+| **言語** | 日本語 | 日英バイリンガル |
 
-**Q: Claude Code Max（$200/月）でないと使えないか？**
-A: テンプレート自体はどのプランでも使えます。ただし、マルチエージェント体制（claude-peers）は複数インスタンスの同時実行が前提なので、Max プランが実質的に必要です。
+**Free = ツール。Pro = ツール + 運用ノウハウ。**
 
-**Q: 特定のスキルが動かない**
-A: スキルは Claude Code のバージョンに依存する場合があります。Issue でご報告ください。
+Claude Code を 1 人で使うなら Free で十分。複数エージェントをチームとして運用するなら、Pro の運用テンプレートで立ち上げ時間を大幅に短縮できる。
 
-## 参考資料
+**[$29 — Gumroad で購入](https://glasswerks.gumroad.com/l/claude-code-template-pro)**
+
+---
+
+## References
 
 - [Affaan Mustafa: Everything Claude Code](https://github.com/affaan-m/everything-claude-code)
 - [Anthropic: Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
-- [Boris Cherny's Workflow](https://venturebeat.com/technology/the-creator-of-claude-code-just-revealed-his-workflow-and-developers-are)
-
-## Contributing
-
-[CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
 
 ## License
 
