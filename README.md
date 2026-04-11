@@ -4,7 +4,18 @@
 
 Claude Code のベストプラクティスを凝縮したテンプレート。`setup.sh` を実行するだけで、テスト駆動開発からマーケティング監査まで、38 のスキルがプロジェクトに即座に適用される。
 
-> **[Pro版 ($29)](https://glasswerks.gumroad.com/l/claude-code-template-pro)** — AIマルチエージェントチーム運用テンプレート。Conductor設定・Tier制PRレビュー・巡回レポート・コスト管理の実運用ノウハウを収録。[Free vs Pro 比較 →](#free-vs-pro)
+<table>
+<tr>
+<td>
+
+**👉 [Get the Pro Template → $29 on Gumroad](https://glasswerks.gumroad.com/l/claude-code-template-pro)**
+
+Free = ツール。**Pro = ツール + マルチエージェント運用ノウハウ。**
+Conductor設定・Tier制PRレビュー・巡回レポート・コスト管理テンプレートを収録。 [Free vs Pro 比較 →](#free-vs-pro)
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -140,6 +151,12 @@ chmod +x setup-claude.sh && ./setup-claude.sh
 | `note-serial-monetization` | note 連載の有料/無料設計 |
 | `freee-api-skill` | freee API 操作ガイド |
 | `note-publish-flow` | note 記事公開フロー（公開前チェック・重複照合・通知） |
+---
+
+> **Running multiple Claude Code agents as a team?** The [Pro template ($29)](https://glasswerks.gumroad.com/l/claude-code-template-pro) includes Conductor setup, Tier-based PR review workflows, patrol reports, and cost management templates. [See what's included →](#free-vs-pro)
+
+---
+
 ### Agents（6 サブエージェント）
 
 | エージェント | 用途 |
